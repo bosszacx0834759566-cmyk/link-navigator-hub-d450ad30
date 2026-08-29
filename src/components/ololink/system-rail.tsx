@@ -128,9 +128,6 @@ function ScenarioRailButton({
 
 /** LEVEL 2 — the system tab rail, docked to the left edge. */
 export function SystemRail({ state }: { state: OloLinkState }) {
-  const active = state.panel;
-  const onToggle = state.togglePanel;
-
   return (
     <nav
       className={cn(
@@ -140,17 +137,6 @@ export function SystemRail({ state }: { state: OloLinkState }) {
           : 'border-r border-transparent bg-transparent'
       )}
     >
-      {SYSTEM_TABS.map((item) => (
-        <div key={item.id} className={item.id === 'settings' ? 'mt-auto' : undefined}>
-          <RailButton
-            item={item}
-            isActive={active === item.id}
-            view={state.view}
-            onToggle={() => onToggle(item.id)}
-          />
-        </div>
-      ))}
-
       {/* earth view mode */}
       <div className="mt-2 flex flex-col items-center gap-1 border-t border-white/[0.06] pt-2">
         <div className="flex flex-col items-center gap-1">
