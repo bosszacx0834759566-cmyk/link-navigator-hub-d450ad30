@@ -53,7 +53,6 @@ function RailButton({
   onToggle: () => void;
 }) {
   const Icon = item.icon;
-  const activeColor = view === '3d' ? 'text-sky-300' : 'text-black';
   return (
     <button
       type="button"
@@ -63,9 +62,13 @@ function RailButton({
       className={cn(
         'group relative flex h-[46px] w-[46px] items-center justify-center rounded-[12px] outline-none transition-all duration-150',
         'focus-visible:ring-1 focus-visible:ring-sky-400/60',
-        isActive
-          ? cn('bg-sky-500/[0.14]', activeColor)
-          : 'text-muted-foreground/60 hover:bg-white/[0.05] hover:text-foreground active:scale-[0.96]'
+        view === '3d'
+          ? isActive
+            ? 'bg-white/[0.12] text-white'
+            : 'text-white/85 hover:bg-white/[0.08] hover:text-white active:scale-[0.96]'
+          : isActive
+            ? 'bg-sky-500/[0.14] text-black'
+            : 'text-muted-foreground/60 hover:bg-white/[0.05] hover:text-foreground active:scale-[0.96]'
       )}
     >
       <Icon className="h-[18px] w-[18px]" strokeWidth={1.5} />
