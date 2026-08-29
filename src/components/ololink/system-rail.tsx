@@ -172,9 +172,13 @@ export function SystemRail({ state }: { state: OloLinkState }) {
                 className={cn(
                   'flex h-[46px] w-[46px] items-center justify-center rounded-[10px] transition-all duration-150',
                   'focus-visible:ring-1 focus-visible:ring-sky-400/60',
-                  active
-                    ? 'bg-sky-500/[0.16] text-sky-200 ring-1 ring-sky-400/25'
-                    : 'text-muted-foreground/60 hover:bg-white/[0.05] hover:text-foreground active:scale-[0.96]'
+                  state.view === '3d'
+                    ? active
+                      ? 'bg-white/[0.14] text-white ring-1 ring-white/30'
+                      : 'text-white/85 hover:bg-white/[0.08] hover:text-white active:scale-[0.96]'
+                    : active
+                      ? 'bg-sky-500/[0.16] text-sky-200 ring-1 ring-sky-400/25'
+                      : 'text-muted-foreground/60 hover:bg-white/[0.05] hover:text-foreground active:scale-[0.96]'
                 )}
               >
                 <Icon className="h-[18px] w-[18px]" strokeWidth={1.5} />
