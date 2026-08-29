@@ -53,7 +53,6 @@ function RailButton({
   onToggle: () => void;
 }) {
   const Icon = item.icon;
-  const activeColor = view === '3d' ? 'text-sky-300' : 'text-black';
   return (
     <button
       type="button"
@@ -63,9 +62,13 @@ function RailButton({
       className={cn(
         'group relative flex h-[46px] w-[46px] items-center justify-center rounded-[12px] outline-none transition-all duration-150',
         'focus-visible:ring-1 focus-visible:ring-sky-400/60',
-        isActive
-          ? cn('bg-sky-500/[0.14]', activeColor)
-          : 'text-muted-foreground/60 hover:bg-white/[0.05] hover:text-foreground active:scale-[0.96]'
+        view === '3d'
+          ? isActive
+            ? 'bg-white/[0.12] text-white'
+            : 'text-white/85 hover:bg-white/[0.08] hover:text-white active:scale-[0.96]'
+          : isActive
+            ? 'bg-sky-500/[0.14] text-black'
+            : 'text-muted-foreground/60 hover:bg-white/[0.05] hover:text-foreground active:scale-[0.96]'
       )}
     >
       <Icon className="h-[18px] w-[18px]" strokeWidth={1.5} />
@@ -93,7 +96,6 @@ function ScenarioRailButton({
   onSelect: (id: ScenarioId) => void;
 }) {
   const Icon = item.icon;
-  const activeColor = view === '3d' ? 'text-sky-300' : 'text-black';
   return (
     <button
       type="button"
@@ -104,9 +106,13 @@ function ScenarioRailButton({
       className={cn(
         'group relative flex h-[46px] w-[46px] items-center justify-center rounded-[12px] outline-none transition-all duration-150',
         'focus-visible:ring-1 focus-visible:ring-sky-400/60 disabled:opacity-50',
-        isActive
-          ? cn('bg-sky-500/[0.14]', activeColor)
-          : 'text-muted-foreground/60 hover:bg-white/[0.05] hover:text-foreground active:scale-[0.96]'
+        view === '3d'
+          ? isActive
+            ? 'bg-white/[0.12] text-white'
+            : 'text-white/85 hover:bg-white/[0.08] hover:text-white active:scale-[0.96]'
+          : isActive
+            ? 'bg-sky-500/[0.14] text-black'
+            : 'text-muted-foreground/60 hover:bg-white/[0.05] hover:text-foreground active:scale-[0.96]'
       )}
     >
       <Icon className="h-[18px] w-[18px]" strokeWidth={1.5} />
@@ -126,7 +132,14 @@ export function SystemRail({ state }: { state: OloLinkState }) {
   const onToggle = state.togglePanel;
 
   return (
-    <nav className="pointer-events-auto absolute bottom-0 left-0 top-0 z-40 flex w-[68px] flex-col items-center gap-1.5 overflow-y-auto border-r border-white/10 bg-white/10 py-3 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.45)] backdrop-blur-2xl [scrollbar-width:none]">
+    <nav
+      className={cn(
+        'pointer-events-auto absolute bottom-0 left-0 top-0 z-40 flex w-[68px] flex-col items-center gap-1.5 overflow-y-auto py-3 [scrollbar-width:none]',
+        state.view === '3d'
+          ? 'border-r border-white/10 bg-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.45)] backdrop-blur-2xl'
+          : 'border-r border-transparent bg-transparent'
+      )}
+    >
       {SYSTEM_TABS.map((item) => (
         <div key={item.id} className={item.id === 'settings' ? 'mt-auto' : undefined}>
           <RailButton
@@ -159,9 +172,13 @@ export function SystemRail({ state }: { state: OloLinkState }) {
                 className={cn(
                   'flex h-[46px] w-[46px] items-center justify-center rounded-[10px] transition-all duration-150',
                   'focus-visible:ring-1 focus-visible:ring-sky-400/60',
-                  active
-                    ? 'bg-sky-500/[0.16] text-sky-200 ring-1 ring-sky-400/25'
-                    : 'text-muted-foreground/60 hover:bg-white/[0.05] hover:text-foreground active:scale-[0.96]'
+                  state.view === '3d'
+                    ? active
+                      ? 'bg-white/[0.14] text-white ring-1 ring-white/30'
+                      : 'text-white/85 hover:bg-white/[0.08] hover:text-white active:scale-[0.96]'
+                    : active
+                      ? 'bg-sky-500/[0.16] text-sky-200 ring-1 ring-sky-400/25'
+                      : 'text-muted-foreground/60 hover:bg-white/[0.05] hover:text-foreground active:scale-[0.96]'
                 )}
               >
                 <Icon className="h-[18px] w-[18px]" strokeWidth={1.5} />
