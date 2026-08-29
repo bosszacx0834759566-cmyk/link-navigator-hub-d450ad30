@@ -41,47 +41,6 @@ export const SYSTEM_TABS: {
   { id: 'settings', label: 'Settings', hint: 'การตั้งค่าของระบบทั้งหมด', icon: Settings2 },
 ];
 
-function RailButton({
-  item,
-  isActive,
-  view,
-  onToggle,
-}: {
-  item: (typeof SYSTEM_TABS)[number];
-  isActive: boolean;
-  view: '3d' | '2d';
-  onToggle: () => void;
-}) {
-  const Icon = item.icon;
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      aria-label={item.label}
-      aria-pressed={isActive}
-      className={cn(
-        'group relative flex h-[46px] w-[46px] items-center justify-center rounded-[12px] outline-none transition-all duration-150',
-        'focus-visible:ring-1 focus-visible:ring-sky-400/60',
-        view === '3d'
-          ? isActive
-            ? 'bg-white/[0.12] text-white'
-            : 'text-white/85 hover:bg-white/[0.08] hover:text-white active:scale-[0.96]'
-          : isActive
-            ? 'bg-sky-500/[0.14] text-black'
-            : 'text-muted-foreground/60 hover:bg-white/[0.05] hover:text-foreground active:scale-[0.96]'
-      )}
-    >
-      <Icon className="h-[18px] w-[18px]" strokeWidth={1.5} />
-
-      <span className="pointer-events-none absolute left-[64px] z-50 hidden -translate-x-1 whitespace-nowrap rounded-md border border-white/[0.08] bg-[#0a0f1c]/95 px-2.5 py-1.5 opacity-0 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.9)] backdrop-blur-xl transition-all duration-150 group-hover:translate-x-0 group-hover:opacity-100 md:block">
-        <span className="block text-[10px] uppercase tracking-[0.2em] text-foreground">
-          {item.hint}
-        </span>
-      </span>
-    </button>
-  );
-}
-
 function ScenarioRailButton({
   item,
   isActive,
